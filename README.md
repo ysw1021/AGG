@@ -7,7 +7,7 @@ Sangwon Yu, Jongyoon Song, Heeseung Kim, Seong-min Lee, Woo-Jong Ryu, Sungroh Yo
 We present code for training models described in the paper, as well as pre-trained models.
 
 # Setup
- - You need a python version >= 3.6
+ - Install python version >= 3.6
  - The implementation is based on a [fairseq](https://github.com/pytorch/fairseq) 0.9.0.
  - Clone this repo and install requirements based on fairseq
  
