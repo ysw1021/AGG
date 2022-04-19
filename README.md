@@ -14,5 +14,5 @@ We present code for training models described in the paper, as well as pre-train
       ```
       git clone https://github.com/ysw1021/AGG.git
       cd AGG
-      pip install -editable .
+      pip install --editable .
       ```
