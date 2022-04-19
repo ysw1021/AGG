@@ -1,0 +1,11 @@
+cython
+numpy
+cffi
+regex
+sacrebleu
+torch
+tqdm
+tensorboardX
+pytorch-transformers
+pandas
+nltk
