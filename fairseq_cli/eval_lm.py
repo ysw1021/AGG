@@ -260,13 +260,13 @@ def main(parsed_args, **unused_kwargs):
     logger.info('Evaluated {} tokens in {:.1f}s ({:.2f} tokens/s)'.format(
         gen_timer.n, gen_timer.sum, 1. / gen_timer.avg
     ))
-    logger.info('Loss_high (base 2): {:.4f}, Perplexity_high: {:.2f}'.format(
+    logger.info('Loss_freq (base 2): {:.4f}, Perplexity_high: {:.2f}'.format(
         avg_nll_loss_high, 2 ** avg_nll_loss_high
     ))
-    logger.info('Loss_mid (base 2): {:.4f}, Perplexity_mid: {:.2f}'.format(
+    logger.info('Loss_med (base 2): {:.4f}, Perplexity_mid: {:.2f}'.format(
         avg_nll_loss_mid, 2 ** avg_nll_loss_mid
     ))
-    logger.info('Loss_low (base 2): {:.4f}, Perplexity_low: {:.2f}'.format(
+    logger.info('Loss_rare (base 2): {:.4f}, Perplexity_low: {:.2f}'.format(
         avg_nll_loss_low, 2 ** avg_nll_loss_low
     ))
     logger.info('Loss (base 2): {:.4f}, Perplexity: {:.2f}'.format(
@@ -282,7 +282,8 @@ def cli_main():
     parser = options.get_eval_lm_parser()
     # add_distributed_training_args(parser)
     args = options.parse_args_and_arch(parser)
-    distributed_utils.call_main(args, main)
+    main(args)
+    # distributed_utils.call_main(args, main)
 
 
 if __name__ == '__main__':
