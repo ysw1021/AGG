@@ -7,9 +7,9 @@ Sangwon Yu, Jongyoon Song, Heeseung Kim, Seong-min Lee, Woo-Jong Ryu, Sungroh Yo
 We present code for training models described in the paper, as well as pre-trained models.
 
 # Setup
- - Install python version >= 3.6
+ - Require python version >= 3.6
  - The implementation is based on a [fairseq](https://github.com/pytorch/fairseq) 0.9.0.
- - Clone this repo and install requirements based on fairseq
+ - Clone this repo and install requirements based on fairseq:
 
 ```
 git clone https://github.com/ysw1021/AGG.git
@@ -27,7 +27,7 @@ cd data/language_model
 bash prepare-wikitext-103.sh
 python gpt2_tokenize.py
 ```
-The commands below assume you are in the ```$AGG``` directory
+The commands below assume you are in the ```$AGG``` directory.
 ```
 python -u preprocess.py --only-source --trainpref data/language_model/wikitext-103/wiki.train.bpetokens \
 --validpref data/language_model/wikitext-103/wiki.valid.bpetokens \
@@ -41,7 +41,7 @@ bash prepare-wmt14en2de.sh --icml17
 # or to use additional news-commentary-v12 data from WMT'17:
 # bash prepare-wmt14en2de.sh
 ```
-The commands below assume you are in the ```$AGG``` directory
+The commands below assume you are in the ```$AGG``` directory.
 ```
 python -u preprocess.py --source-lang en --target-lang de \
 --trainpref data/translation_wmt/wmt14_en_de/train \
@@ -53,9 +53,9 @@ python -u preprocess.py --source-lang en --target-lang de \
 # Training
  We tested scripts using an NVIDIA A40 gpu in a single setting. In multi-gpu settings, we found that there is a problem about batch data processing of AGG loss function: mini-batch samples in the gpus except the first gpu are ignored while calculating token appearance for rare token grouping. Solutions for multi-gpu settings will be updated later. 
  
- If you get OOM errors, try decreasing the batch size (```--max-tokens```,```--tokens-per-sample```)
+ If you get OOM errors, try decreasing the batch size (```--max-tokens```,```--tokens-per-sample```).
  
- The commands below assume you are in the ```$AGG``` directory
+ The commands below assume you are in the ```$AGG``` directory.
  
   ## Language Modeling with WikiText-103 dataset
 
@@ -121,10 +121,55 @@ python -u preprocess.py --source-lang en --target-lang de \
 
 # Pretrained Weights
 
+  
 
 # Evaluation
+The commands below assume you are in the ```$AGG``` directory.
 
+  ### Language Modeling
+   - Evaluate PPL score for each token groups (high, medium, rare):
+   
+```
+python -u eval_lm.py data-bin/wikitext-103_bpe --path checkpoints/$YOUR_CHECKPOINT_DIR/checkpoint_best.pt \
+--batch-size 2 --tokens-per-sample 512 --context-window 400
+```  
 
+   - Evaluate Uniq score for each token groups (high, medium, rare):
+
+```
+python -u fairseq/custom/evaluation.py --batch-size-single-prediction 512 --batch-size-completion 48 \
+--save-path ./eval_lm_metrics --ckpt best --model-path ./checkpoints/$YOUR_CHECKPOINT_DIR \
+--data-dir ./data-bin/wikitext-103_bpe --base-dir ./ --eval-mode singletoken --data-split test
+```
+  
+  ### Word Similarity
+  
+  ```
+  python -u eval_emb.py --path-dir checkpoints/$YOUR_CHECKPOINT_DIR --path-file checkpoint_best.pt
+  ```
+  
+  ### Neural Machine Translation
+  
+  - You can make average checkpoints through below script:
+  
+  ```
+  python -u translation_eval/average_checkpoints.py --inputs checkpoints/$YOUR_CHECKPOINT_DIR --num-epoch-checkpoints 5 \
+  --checkpoint-upper-bound 96 --output checkpoints/$YOUR_CHECKPOINT_DIR/checkpoint_avg.pt
+  ```
+
+  - Generate target sequences given test dataset from checkpoints:
+
+  ```
+  python -u data-bin/wmt14_en_de_joined --gen-subset test --path checkpoints/$YOUR_CHECKPOINT_DIR/checkpoint_avg.pt \
+  --beam 4 --batch-size 100 --lenpen 0.6 --remove-bpe | tee translate.out
+  ```
+  
+  - Since [Vaswani et al. (2017)](https://arxiv.org/abs/1706.03762) used compound splitting, we also use compound splitting for final BLEU score of the model trained for WMT'14 English to German dataset:
+  
+  ```
+  bash translation_eval/compound_split_bleu.sh translate.out
+  ```
+  
 # Reference
 
 - Fairseq \
