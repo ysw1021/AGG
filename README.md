@@ -61,7 +61,7 @@ python -u preprocess.py --source-lang en --target-lang de \
 
    ### Baseline (MLE) Model
    
-     python -u train.py --task language_modeling data/wikitext-103_bpe --save-dir checkpoints/baseline_model \
+     python -u train.py --task language_modeling data-bin/wikitext-103_bpe --save-dir checkpoints/baseline_model \
      --tensorboard-logdir checkpoints/baseline_model --arch transformer_lm_gpt2_small --share-decoder-input-output-embed \
      --dropout 0.1 --optimizer adam --adam-betas '(0.9, 0.98)' --criterion cross_entropy --seed 1 --weight-decay 0.01 \
      --clip-norm 0.0 --skip-invalid-size-inputs-valid-test --ddp-backend=no_c10d --no-progress-bar --log-interval 100 \
@@ -70,7 +70,7 @@ python -u preprocess.py --source-lang en --target-lang de \
      
    ### Train Model with AGG loss
    
-     python -u train.py --task language_modeling data/wikitext-103_bpe --save-dir checkpoints/agg_model \
+     python -u train.py --task language_modeling data-bin/wikitext-103_bpe --save-dir checkpoints/agg_model \
      --tensorboard-logdir checkpoints/agg_model --arch transformer_lm_gpt2_small --share-decoder-input-output-embed \
      --dropout 0.1 --optimizer adam --adam-betas '(0.9, 0.98)' --criterion cross_entropy_agg --agg-alpha 0.03\
      --seed 1 --weight-decay 0.01 --clip-norm 0.0 --skip-invalid-size-inputs-valid-test --ddp-backend=no_c10d --no-progress-bar \
