@@ -3,7 +3,7 @@ import torch
 import numpy as np
 import os
 from fairseq.models.transformer_lm import TransformerLanguageModel
-from embedding_eval.web.datasets.similarity import fetch_MEN, fetch_WS353, fetch_SimLex999, fetch_RG65, fetch_RW
+from embedding_eval.web.datasets.similarity import fetch_MEN, fetch_WS353, fetch_RG65, fetch_RW
 from six import iteritems
 import scipy
 
