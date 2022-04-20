@@ -132,14 +132,14 @@ We provide pre-trained weights of the models trained by AGG loss via Google Driv
 The commands below assume you are in the ```$AGG``` directory.
 
   ### Language Modeling
-   - Evaluate PPL score for each token groups (high, medium, rare):
+   - Evaluate PPL score for each token groups (frequent, medium, rare):
    
 ```
 python -u eval_lm.py data-bin/wikitext-103_bpe --path checkpoints/$YOUR_CHECKPOINT_DIR/checkpoint_best.pt \
 --batch-size 2 --tokens-per-sample 512 --context-window 400
 ```  
 
-   - Evaluate Uniq score for each token groups (high, medium, rare):
+   - Evaluate Uniq score for each token groups (frequent, medium, rare):
 
 ```
 python -u fairseq/custom/evaluation.py --batch-size-single-prediction 512 --batch-size-completion 48 \
