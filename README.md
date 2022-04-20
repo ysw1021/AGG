@@ -118,7 +118,18 @@ python -u preprocess.py --source-lang en --target-lang de \
      --min-lr '1e-09' --warmup-updates 4000 --warmup-init-lr '1e-07' --weight-decay 0.01 --dropout 0.3 \
      --log-format 'simple' --log-interval 100 --max-tokens 8192 --save-interval-updates 2000 --max-update 200000 \
      --keep-interval-updates 10 --no-progress-bar --update-freq 8 --fp16 --seed 1  
- 
-     
- 
-  
+
+# Pretrained Weights
+
+
+# Evaluation
+
+
+# Reference
+
+- Fairseq \
+  https://github.com/pytorch/fairseq
+
+- Neural Text Generation with Unlikelihood Training \
+  https://github.com/facebookresearch/unlikelihood_training
+      
