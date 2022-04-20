@@ -122,14 +122,11 @@ python -u preprocess.py --source-lang en --target-lang de \
 # Pretrained Weights
 We provide pre-trained weights of the models trained by AGG loss via Google Drive. You can reproduce the experimental performance of the paper by loading the corresponding weights.
 
- - [GPT-2 medium AGG model trained with WikiText-103 dataset]
- (https://drive.google.com/file/d/18wz-87j0wpLQJP-WRLxUJNLnENNzk_km/view?usp=sharing)
+ - [GPT-2 medium AGG model trained with WikiText-103 dataset](https://drive.google.com/file/d/18wz-87j0wpLQJP-WRLxUJNLnENNzk_km/view?usp=sharing)
 
- - [Transformer-base AGG model trained with WMT'14 English to German dataset]
- (https://drive.google.com/file/d/12VHNuhWdHE4xYa2eBFqHYPzPVLS1V3jY/view?usp=sharing)
+ - [Transformer-base AGG model trained with WMT'14 English to German dataset](https://drive.google.com/file/d/12VHNuhWdHE4xYa2eBFqHYPzPVLS1V3jY/view?usp=sharing)
 
- - [Transformer-big AGG model trained with WMT'14 English to German dataset]
- (https://drive.google.com/file/d/1J-HBMbQPDYliJtwCokFAU-4psfy5ABlg/view?usp=sharing)
+ - [Transformer-big AGG model trained with WMT'14 English to German dataset](https://drive.google.com/file/d/1J-HBMbQPDYliJtwCokFAU-4psfy5ABlg/view?usp=sharing)
 
 # Evaluation
 The commands below assume you are in the ```$AGG``` directory.
