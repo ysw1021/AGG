@@ -66,11 +66,15 @@ def evaluate_similarity(tokenizer, token_dict, token_emb, X, y):
     return scipy.stats.spearmanr(scores, y).correlation
 
 
-ckpt_path = './checkpoints/transformer_wikitext-103_bpe_agps2_0.03_gpu1'
-ckpt_path = './checkpoints/transformer_wikitext-103_bpe1024_2'
-ckpt_path = './checkpoints/transformer_wikitext-103_bpe_agps2_ul'
+parser = argparse.ArgumentParser()
+parser.add_argument('--path-dir', default=None, type=str)
+parser.add_argument('--path-file', default=None, type=str)
+args = parser.parse_args()
 
-LangMo = TransformerLanguageModel.from_pretrained(ckpt_path, 'checkpoint6.pt')
+ckpt_dir = args.path_dir
+ckpt_filename = args.path_file
+
+LangMo = TransformerLanguageModel.from_pretrained(ckpt_dir, ckpt_filename)
 
 token_dict = LangMo.tgt_dict.indices
 token_emb = LangMo.models[0].decoder.output_projection.weight.detach()
