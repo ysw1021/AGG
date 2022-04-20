@@ -120,8 +120,16 @@ python -u preprocess.py --source-lang en --target-lang de \
      --keep-interval-updates 10 --no-progress-bar --update-freq 8 --fp16 --seed 1  
 
 # Pretrained Weights
+We provide pre-trained weights of the models trained by AGG loss via Google Drive. You can reproduce the experimental performance of the paper by loading the corresponding weights.
 
-  
+ - GPT-2 medium AGG model trained with WikiText-103 dataset
+ [Link](https://drive.google.com/file/d/18wz-87j0wpLQJP-WRLxUJNLnENNzk_km/view?usp=sharing)
+
+ - Transformer-base AGG model trained with WMT'14 English to German dataset
+ [Link](https://drive.google.com/file/d/12VHNuhWdHE4xYa2eBFqHYPzPVLS1V3jY/view?usp=sharing)
+
+ - Transformer-big AGG model trained with WMT'14 English to German dataset
+ [Link](https://drive.google.com/file/d/1J-HBMbQPDYliJtwCokFAU-4psfy5ABlg/view?usp=sharing)
 
 # Evaluation
 The commands below assume you are in the ```$AGG``` directory.
@@ -164,7 +172,7 @@ python -u fairseq/custom/evaluation.py --batch-size-single-prediction 512 --batc
   --beam 4 --batch-size 100 --lenpen 0.6 --remove-bpe | tee translate.out
   ```
   
-  - Since [Vaswani et al. (2017)](https://arxiv.org/abs/1706.03762) used compound splitting, we also use compound splitting for final BLEU score of the model trained for WMT'14 English to German dataset:
+  - Since [Vaswani et al. (2017)](https://arxiv.org/abs/1706.03762) used compound splitting, we also use compound splitting to calculate final BLEU score of the model trained with WMT'14 English to German dataset:
   
   ```
   bash translation_eval/compound_split_bleu.sh translate.out
