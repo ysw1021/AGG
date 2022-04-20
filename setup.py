@@ -145,6 +145,7 @@ setup(
         'pandas',
         'pytorch-transformers',
         'tensorboardX',
+        'scipy',
     ],
     dependency_links=dependency_links,
     packages=find_packages(exclude=['scripts', 'tests']),
